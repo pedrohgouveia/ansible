@@ -1,0 +1,8 @@
+---
+  - hosts: db
+    tasks:
+      - name: install install mysql-server     
+        yum: name=mysql-server state=present update_cache=yes
+
+      - name: ensure mysql started
+        service: name=mysql-server state=started enabled=yes

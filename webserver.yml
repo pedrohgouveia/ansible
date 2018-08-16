@@ -1,0 +1,13 @@
+---
+  - hosts: webserver
+    tasks:
+      - name: install web components     
+        yum: name={{item}} state=present update_cache=yes
+        with_items:
+          - httpd
+          - lighttpd-mod_mysql_vhost.x86_64
+          - python-pip
+          - libmicrohttpd-doc.noarch
+
+      - name: ensure httpd started
+        service: name=httpd state=started enabled=yes

@@ -1,0 +1,25 @@
+---
+#stop fronted
+  - hosts: lb
+    become_user: phnunes
+    tasks:
+      - service: name=nginx state=stopped enabled=yes
+ 
+  - hosts: webserver
+    tasks:
+      - service: name=httpd state=stopped
+
+#Restart myqsl
+  - hosts: database
+    tasks:
+      - service: name=mysql-server state=restarted
+
+
+#Start frontend
+  - hosts: lb
+    tasks:
+      - service: name=nginx state=started
+
+  - hosts: webserver
+    tasks:
+      - service: name=httpd state=started

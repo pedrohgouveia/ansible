@@ -1,0 +1,6 @@
+---
+  - hosts: lb
+    become_user: phnunes
+    tasks:
+            - user: name=Teste comment="My user" password='teste123@' groups=phnunes remove=yes shell=/bin/bash password='teste123'
+            - user: name=teste2
